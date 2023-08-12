@@ -20,7 +20,10 @@ get_db = database.get_db
 def all():
     try:
         response = requests.get(
-            os.getenv("WORLD_NEWS_API")+'?'+'api-key'+'='+os.getenv("WORLD_NEWS_API_KEY"))
+            os.getenv("WORLD_NEWS_API")+'?' +
+            'api-key' + '='+os.getenv("WORLD_NEWS_API_KEY")
+        )
+        response.raise_for_status()
         return response.json()
     except httpx.RequestError as e:
         return {"error": "Request to third-party API failed"}
