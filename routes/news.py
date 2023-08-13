@@ -1,6 +1,5 @@
-from fastapi import APIRouter, status, Depends, HTTPException
-# from ..dependencies import get_token_header
-from sqlalchemy.orm import Session
+import httpx
+from fastapi import APIRouter
 import database
 import requests
 import os
@@ -17,7 +16,7 @@ get_db = database.get_db
 
 
 @router.get("/")
-def all():
+def news():
     try:
         response = requests.get(
             os.getenv("WORLD_NEWS_API")+'?' +
